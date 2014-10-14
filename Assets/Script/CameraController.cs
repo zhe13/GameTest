@@ -14,4 +14,6 @@ public class CameraController : MonoBehaviour {
 	void LateUpdate () {
 		transform.position = ball.transform.position + offset;
 	}
+
+
 }

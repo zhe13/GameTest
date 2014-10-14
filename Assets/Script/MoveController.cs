@@ -12,4 +12,11 @@ public class MoveController : MonoBehaviour {
 		rigidbody.AddForce (movement * speed *Time.deltaTime);
 		//为了确保帧独立，与delatetime相乘
 	}
+
+
+	void OnTriggerEnter(Collider other) {
+		//Destroy(other.gameObject);
+		if (other.gameObject.tag == "Coins")
+			other.gameObject.SetActive (false);
+	}
 }
