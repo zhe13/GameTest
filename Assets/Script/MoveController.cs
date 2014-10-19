@@ -4,7 +4,19 @@ using System.Collections;
 public class MoveController : MonoBehaviour {
 
 	public float speed;
-	void FixedUpdate () {
+    public GUIText scoreTxt;
+    private float score;
+    public GUIText win;
+
+    void Start()
+    {
+        score = 0;
+        updateScore();
+        win.text = "";
+    }
+
+	void FixedUpdate () 
+    {
 		float moveHor = Input.GetAxis ("Horizontal");
 		float moveVer = Input.GetAxis ("Vertical");
 
@@ -14,9 +26,21 @@ public class MoveController : MonoBehaviour {
 	}
 
 
-	void OnTriggerEnter(Collider other) {
+	void OnTriggerEnter(Collider other) 
+    {
 		//Destroy(other.gameObject);
-		if (other.gameObject.tag == "Coins")
-			other.gameObject.SetActive (false);
+        if (other.gameObject.tag == "Coins")
+        {
+            other.gameObject.SetActive(false);
+            score++;
+            updateScore();
+            if (score > 5)
+                win.text = "You Win!";
+        }
 	}
+
+    void updateScore()
+    {
+        scoreTxt.text = "Score:" + score.ToString();
+    }
 }
